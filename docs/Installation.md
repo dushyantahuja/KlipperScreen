@@ -3,6 +3,8 @@ KlipperScreen should run on any HDMI touchscreen that you can connect to a compu
 be slightly different depending on what model you get. I am developing on a 1024x600 resolution screen. Due to this,
 other resolutions may not be scaled properly at this moment. UI scaling is a future development item.
 
+Will also work with a PiTFT 3.5 (http://www.lcdwiki.com/3.5inch_RPi_Display). This is a smaller, much cheaper display that can be installed directly on the RPi using the GPIO pins. No additional cables required. 
+
 #### Configure Hardware
 
 Add the following to _/boot/config.txt_. You can alter the hdmi_cvt to your screen specifications. This example is setup
@@ -16,6 +18,17 @@ hdmi_drive=2
 * Development has been using 1024x600 for a screen resolution. Other resolutions may have issues currently
 
 After changing _/boot/config.txt_ you must reboot your raspberry pi. Please also ensure you followed setting up your screen via the screen instructions. This will likely have a xorg.conf.d file for input from the touchscreen that you need to create.
+
+For the 3.5inch RPi Display, you will need to install the driver instead (from http://www.lcdwiki.com/3.5inch_RPi_Display#Driver_Installation)
+
+```
+sudo rm -rf LCD-show
+git clone https://github.com/goodtft/LCD-show.git
+chmod -R 755 LCD-show
+cd LCD-show/
+sudo ./LCD35-show
+```
+Once the pi reboots, the screen should be working. 
 
 ### Installation
 
@@ -37,6 +50,12 @@ trusted_clients:
 ```
 
 For moonraker, ensure that 127.0.0.1 is a trusted client:
+
+clone the KlipperScreen git:
+
+```
+git clone https://github.com/jordanruthe/KlipperScreen.git
+```
 
 Run _scripts/KlipperScreen-install.sh_
 This script will install packages that are listed under manual install, create a
